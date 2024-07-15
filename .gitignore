@@ -1,0 +1,4 @@
+/node_modules
+
+# Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.json
