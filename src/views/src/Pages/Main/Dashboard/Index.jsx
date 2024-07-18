@@ -23,7 +23,7 @@ const Index = () => {
                   <div className="card info-card sales-card">
                     <div className="card-body">
                       <h5 className="card-title">
-                        Sales <span>| Today</span>
+                        Vouchers <span>| Today</span>
                       </h5>
 
                       <div className="d-flex align-items-center">
@@ -31,13 +31,13 @@ const Index = () => {
                           <i className="bi bi-cart"></i>
                         </div>
                         <div className="ps-3">
-                          <h6>A</h6>
-                          {/* <span className="text-success small pt-1 fw-bold">
-                            12%
+                          <h6>Voucher</h6>
+                          <span className="text-success small pt-1 fw-bold">
+                            12
                           </span>
                           <span className="text-muted small pt-2 ps-1">
-                            increase
-                          </span> */}
+                            created
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -57,12 +57,12 @@ const Index = () => {
                         </div>
                         <div className="ps-3">
                           <h6>3,264</h6>
-                          {/* <span className="text-success small pt-1 fw-bold">
+                          <span className="text-success small pt-1 fw-bold">
                             8%
-                          </span> */}
-                          {/* <span className="text-muted small pt-2 ps-1">
+                          </span>
+                          <span className="text-muted small pt-2 ps-1">
                             increase
-                          </span> */}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -82,12 +82,12 @@ const Index = () => {
                         </div>
                         <div className="ps-3">
                           <h6>1244</h6>
-                          {/* <span className="text-danger small pt-1 fw-bold">
+                          <span className="text-danger small pt-1 fw-bold">
                             12%
                           </span>
                           <span className="text-muted small pt-2 ps-1">
                             decrease
-                          </span> */}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -193,72 +193,6 @@ const Index = () => {
                           </Link>
                         </li>
                       </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-lg-4">
-              <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">
-                    Recent Activity <span>| Today</span>
-                  </h5>
-
-                  <div className="activity">
-                    <div className="activity-item d-flex">
-                      <div className="activite-label">32 min</div>
-                      <i className="bi bi-circle-fill activity-badge text-success align-self-start"></i>
-                      <div className="activity-content">
-                        New Products listed
-                        <Link to="#" className="fw-bold text-dark">
-                          dawood
-                        </Link>
-                        mart
-                      </div>
-                    </div>
-
-                    <div className="activity-item d-flex">
-                      <div className="activite-label">56 min</div>
-                      <i className="bi bi-circle-fill activity-badge text-danger align-self-start"></i>
-                      <div className="activity-content">
-                        last 3 month data was move to bin
-                      </div>
-                    </div>
-
-                    <div className="activity-item d-flex">
-                      <div className="activite-label">2 hrs</div>
-                      <i className="bi bi-circle-fill activity-badge text-primary align-self-start"></i>
-                      <div className="activity-content">
-                        sales modules updated
-                      </div>
-                    </div>
-
-                    <div className="activity-item d-flex">
-                      <div className="activite-label">1 day</div>
-                      <i className="bi bi-circle-fill activity-badge text-info align-self-start"></i>
-                      <div className="activity-content">
-                        last 3 days sale report
-                        <Link to="#" className="fw-bold text-dark">
-                          download by
-                        </Link>
-                        dawood
-                      </div>
-                    </div>
-
-                    <div className="activity-item d-flex">
-                      <div className="activite-label">2 days</div>
-                      <i className="bi bi-circle-fill activity-badge text-warning align-self-start"></i>
-                      <div className="activity-content">
-                        10 products was return
-                      </div>
-                    </div>
-
-                    <div className="activity-item d-flex">
-                      <div className="activite-label">4 weeks</div>
-                      <i className="bi bi-circle-fill activity-badge text-muted align-self-start"></i>
-                      <div className="activity-content">stock updated</div>
                     </div>
                   </div>
                 </div>

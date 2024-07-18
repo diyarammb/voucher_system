@@ -1,61 +1,60 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import Header from "../../Header/Header";
 import SideBar from "../../Header/SideBar";
+import {
+  updateVoucher,
+  viewVoucherById,
+} from "../../../app/actions/voucherActions";
 import { toast } from "react-toastify";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addProduct } from "../../../app/actions/productActions";
-
-const Addvoucher = () => {
+const Editvoucher = () => {
   const dispatch = useDispatch();
-  const { loading } = useSelector((state) => state.product);
-
-  const [voucherData, setvoucherData] = useState({
+  const { loading, error, vouchers, message } = useSelector(
+    (state) => state.getbyIdVc
+  );
+  console.log(vouchers);
+  const { id } = useParams();
+  // Initialize local state with empty strings or default values
+  const [voucherData, setVoucherData] = useState({
     voucher_code: "",
     discount_type: "",
     discount_value: "",
     expiry_date: "",
     issue_date: "",
     status: "",
-    notes: "",
   });
+  // Fetch product data when component mounts or id changes
+  useEffect(() => {
+    if (id) {
+      dispatch(viewVoucherById(id));
+    }
+  }, [dispatch, id]);
+  // Update local state with product data from Redux when it changes
+  useEffect(() => {
+    if (vouchers) {
+      setVoucherData({
+        voucher_code: vouchers.voucher_code || "",
+        discount_type: vouchers.discount_type || "",
+        discount_value: vouchers.discount_value || "",
+        expiry_date: vouchers.expiry_date || "",
+        issue_date: vouchers.issue_date || "",
+        status: vouchers.status || "",
+      });
+    }
+  }, [vouchers]);
 
+  // Handle changes in form inputs
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setvoucherData({ ...voucherData, [name]: value });
+    setVoucherData({ ...voucherData, [name]: value });
   };
 
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (validateForm()) {
-      dispatch(addProduct(voucherData));
-      clearForm();
-      toast.success("Product Added Successfully");
-    }
-  };
-  const validateForm = () => {
-    if (!voucherData.voucher_code.trim()) {
-      toast.error("voucher code  is required");
-      return false;
-    }
-    if (!voucherData.discount_value.trim()) {
-      toast.error("discount value is required");
-      return false;
-    }
-
-    return true;
-  };
-
-  // clear form
-  const clearForm = () => {
-    setvoucherData({
-      voucher_code: "",
-      discount_type: "",
-      discount_value: "",
-      expiry_date: "",
-      issue_date: "",
-      status: "",
-      notes: "",
-    });
+    dispatch(updateVoucher(id, voucherData));
+    toast.success("voucher updated");
   };
 
   return (
@@ -66,7 +65,7 @@ const Addvoucher = () => {
         <div className="pagetitle">
           <div className="card">
             <div className="card-body">
-              <h5 className="card-title">Create Voucher</h5>
+              <h5 className="card-title">update Voucher {id}</h5>
 
               <form className="row g-3" onSubmit={handleSubmit}>
                 <div className="col-md-6">
@@ -92,7 +91,7 @@ const Addvoucher = () => {
                       value={voucherData.discount_type}
                       onChange={handleChange}
                     />
-                    <label htmlFor="floatingName">discount Type</label>
+                    <label htmlFor="floatingName">idiscount type</label>
                   </div>
                 </div>
                 <div className="col-md-6">
@@ -112,21 +111,21 @@ const Addvoucher = () => {
                 <div className="col-md-6">
                   <div className="form-floating">
                     <input
-                      type="date"
+                      type="text"
                       className="form-control"
                       id="floatingName"
                       name="expiry_date"
                       value={voucherData.expiry_date}
                       onChange={handleChange}
                     />
-                    <label htmlFor="floatingName">expiry date</label>
+                    <label htmlFor="floatingName">expiry_date</label>
                   </div>
                 </div>
                 {/* category */}
                 <div className="col-md-6">
                   <div className="form-floating mb-3">
                     <input
-                      type="date"
+                      type="text"
                       className="form-control"
                       id="floatingSelect"
                       name="issue_date"
@@ -147,56 +146,25 @@ const Addvoucher = () => {
                       value={voucherData.status}
                       onChange={handleChange}
                     />
-                    <label htmlFor="floatingSelect">status</label>
+                    <label htmlFor="floatingSelect">Status</label>
                   </div>
                 </div>
 
-                <div className="col-md-6">
-                  <div className="form-floating">
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="floatingPrice"
-                      name="notes"
-                      value={voucherData.notes}
-                      onChange={handleChange}
-                    />
-                    <label htmlFor="floatingPrice">notes</label>
-                  </div>
-                </div>
-
-                {/* <div className="col-md-6">
-                  <div className="form-floating mb-3">
-                    <select
-                      className="form-select"
-                      id="floatingSelect"
-                      name="returnType"
-                      value={voucherData.returnType}
-                      onChange={handleChange}
-                    >
-                      <option value="">Select Return Type</option>
-                      <option value="refundable">Refundable</option>
-                      <option value="returnable">Returnable</option>
-                    </select>
-                    <label htmlFor="floatingSelect">Return Type</label>
-                  </div>
-                </div> */}
-
-                <div className="text-center">
-                  <div className="text-center">
+                <div className="">
+                  <div className="">
                     <button
                       type="submit"
-                      className="btn btn-primary m-2"
+                      className="btn btn-primary "
                       disabled={loading}
                     >
-                      {loading ? "Adding..." : "Add voucher"}
+                      {loading ? "Adding..." : "update Voucher"}
                     </button>
                   </div>
-
-                  {/* <button type="reset" className="btn btn-secondary">
-                    Reset
-                  </button> */}
                 </div>
+                {error && <div className="alert alert-danger">{error}</div>}
+                {message && (
+                  <div className="alert alert-success">{message}</div>
+                )}
               </form>
             </div>
           </div>
@@ -205,5 +173,4 @@ const Addvoucher = () => {
     </>
   );
 };
-
-export default Addvoucher;
+export default Editvoucher;

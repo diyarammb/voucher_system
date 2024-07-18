@@ -1,32 +1,18 @@
-import Header from "../../Header/Header";
-import SideBar from "../../Header/SideBar";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import {
-  fetchProduct,
-  deleteProduct,
-} from "../../../app/actions/productActions";
+import { fetchVouchers } from "../../../app/actions/voucherActions";
 import { Link } from "react-router-dom";
+import Header from "../../Header/Header";
+import SideBar from "../../Header/SideBar";
 
 const VoucherList = () => {
   const dispatch = useDispatch();
-
-  const setState = (state) => ({
-    loading: state.viewProduct.loading,
-    message: state.deleteProduct.message,
-    error: state.deleteProduct.error,
-    products: state.viewProduct.products,
-  });
-  const { products, error, message } = useSelector(setState);
+  const { vouchers, error, message } = useSelector((state) => state.viewvc);
 
   useEffect(() => {
-    dispatch(fetchProduct());
-  }, [dispatch, products]);
-
-  const handleDelete = (id) => {
-    dispatch(deleteProduct(id));
-  };
+    dispatch(fetchVouchers());
+  }, [dispatch]);
 
   useEffect(() => {
     if (error) {
@@ -35,7 +21,7 @@ const VoucherList = () => {
     if (message) {
       toast.success(message);
     }
-  });
+  }, [error, message]);
 
   return (
     <>
@@ -52,18 +38,12 @@ const VoucherList = () => {
               </li>
               <li className="breadcrumb-item">vouchers</li>
             </ol>
-            <ol className="breadcrumb">
-              <h5 className="card-title">
-                {" "}
-                <Link
-                  className="btn btn-success text-white"
-                  to="/create-product"
-                >
-                  Add
-                </Link>
-              </h5>
-            </ol>
           </nav>
+          <h5 className="card-title">
+            <Link className="btn btn-success text-white" to="/add/voucher">
+              Add
+            </Link>
+          </h5>
         </div>
         <section className="section">
           <div className="row">
@@ -84,27 +64,21 @@ const VoucherList = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {products.map((product) => (
-                        <tr key={product.product_id}>
-                          <td>{product.product_lookup_code}</td>
-                          <td>{product.product_name}</td>
-                          <td>{product.product_Type}</td>
-                          <td>{product.description}</td>
-                          <td>{product.category}</td>
-                          <td>{product.price}</td>
+                      {vouchers.map((voucher) => (
+                        <tr key={voucher.voucher_id}>
+                          <td>{voucher.voucher_code}</td>
+                          <td>{voucher.discount_type}</td>
+                          <td>{voucher.discount_value}</td>
+                          <td>{voucher.expiry_date}</td>
+                          <td>{voucher.issue_date}</td>
+                          <td>{voucher.status}</td>
                           <td>
-                            <Link to={`/products/${product.product_id}`}>
+                            <Link to={`/voucher/${voucher.voucher_id}`}>
                               <i className="bi bi-eye text-primary m-1"></i>
                             </Link>
-
-                            <Link to={`/product/edit/${product.product_id}`}>
+                            <Link to={`/voucher/edit/${voucher.voucher_id}`}>
                               <i className="bi bi-pencil-square text-success m-1"></i>
                             </Link>
-                            <span
-                              onClick={() => handleDelete(product.product_id)}
-                            >
-                              <i className="bi bi-trash text-danger m-1"></i>
-                            </span>
                           </td>
                         </tr>
                       ))}

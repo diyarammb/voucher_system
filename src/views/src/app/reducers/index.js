@@ -1,13 +1,6 @@
 import { combineReducers } from "redux";
 
-import {
-  viewProduct,
-  productReducer,
-  deleteProduct,
-  updateProduct,
-  getProductByID,
-} from "./productReducer";
-
+import { addVoucherReducer, viewVouchers,getvoucherByID ,updateVoucher} from "./voucherReducer";
 import { createUserReducer, userLoginReducer } from "./userReducer";
 
 const rootReducer = combineReducers({
@@ -16,11 +9,10 @@ const rootReducer = combineReducers({
   userLogin: userLoginReducer,
 
   // productReducer
-  product: productReducer,
-  viewProduct: viewProduct,
-  viewProductById: getProductByID,
-  deleteProduct: deleteProduct,
-  editProduct: updateProduct,
+  addvc: addVoucherReducer,
+  viewvc: viewVouchers,
+  getbyIdVc:getvoucherByID,
+  updateVc:updateVoucher
 });
 
 export default rootReducer;

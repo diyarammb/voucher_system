@@ -18,10 +18,10 @@ import Register from "./Pages/Main/Auth/Register";
 import Login from "./Pages/Main/Auth/Login";
 import NotFound from "./Pages/NotFound";
 
-import VoucherList from "./Pages/Main/Product/VoucherList";
-import Product from "./Pages/Main/Product/Voucher";
-import Addvoucher from "./Pages/Main/Product/Addvoucher";
-import Editvoucher from "./Pages/Main/Product/Editvoucher";
+import VoucherList from "./Pages/Main/Vouchers/VoucherList";
+import Addvoucher from "./Pages/Main/Vouchers/Addvoucher";
+import Editvoucher from "./Pages/Main/Vouchers/Editvoucher";
+import Voucher from "./Pages/Main/Vouchers/Voucher";
 import ProtectedRoutes from "./Pages/Main/utils/ProtectedRoutes";
 
 const App = () => {
@@ -38,11 +38,11 @@ const App = () => {
 
           {/* Group part */}
 
-          {/* product Route start */}
+          {/* Vouchers Route start */}
           <Route path="/vouchers" element={<VoucherList />} />
           <Route path="/add/voucher" element={<Addvoucher />} />
           <Route path="/voucher/edit/:id" element={<Editvoucher />} />
-          <Route path="/voucher/:id" element={<Product />} />
+          <Route path="/voucher/:id" element={<Voucher />} />
         </Route>
       </Routes>
       <ToastContainer />

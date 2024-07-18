@@ -32,7 +32,7 @@ const SideBar = () => {
               <li>
                 <Link to="/vouchers">
                   <i className="bi bi-circle"></i>
-                  <span>Product List</span>
+                  <span>Vouchers</span>
                 </Link>
               </li>
             </ul>
