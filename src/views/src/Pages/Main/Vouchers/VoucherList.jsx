@@ -57,7 +57,6 @@ const VoucherList = () => {
                         <th>discount_type</th>
                         <th>discount_value</th>
                         <th>expiry_date</th>
-                        {/* <th>department</th> */}
                         <th>issue_date</th>
                         <th>status</th>
                         <th>Action</th>
@@ -69,8 +68,12 @@ const VoucherList = () => {
                           <td>{voucher.voucher_code}</td>
                           <td>{voucher.discount_type}</td>
                           <td>{voucher.discount_value}</td>
-                          <td>{voucher.expiry_date}</td>
-                          <td>{voucher.issue_date}</td>
+                          <td>
+                            {new Date(voucher.expiry_date).toLocaleDateString()}
+                          </td>
+                          <td>
+                            {new Date(voucher.issue_date).toLocaleDateString()}
+                          </td>
                           <td>{voucher.status}</td>
                           <td>
                             <Link to={`/voucher/${voucher.voucher_id}`}>

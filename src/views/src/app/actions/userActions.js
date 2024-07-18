@@ -17,7 +17,7 @@ export const addUser = (userData) => {
   return (dispatch) => {
     dispatch(requestAction(USER_REQUEST));
     axios
-      .post("http://localhost:5454/api/users/register", userData)
+      .post("http://localhost:3292/api/userRegister", userData)
       .then((response) => {
         dispatch(successAction(USER_SUCCESS, response.data.message));
       })
@@ -33,7 +33,9 @@ export const userLogin = (userlogin, navigate) => {
     dispatch(requestAction(USER_LOGIN_REQUEST));
 
     axios
-      .post("http://localhost:5454/api/users/login", userlogin,{ withCredentials: true,})
+      .post("http://localhost:3292/api/userLogin", userlogin, {
+        withCredentials: true,
+      })
       .then((response) => {
         dispatch(successAction(USER_LOGIN_SUCCESS, response.data.message));
         Cookies.set("isLogged", true);

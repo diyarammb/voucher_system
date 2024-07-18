@@ -1,11 +1,56 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { addUser } from "../../../app/actions/userActions";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Register = () => {
-  const [registe_data, formdata] = useState({ name: "" });
+  const dispatch = useDispatch();
+  const { message, error } = useSelector((state) => state.userCreate);
+  console.log(message, error);
+  const [registe_data, formdata] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    formdata({ ...registe_data, [name]: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
+    if (validateForm()) {
+      dispatch(addUser(registe_data));
+      clearForm();
+      toast.success("Registration Successfully");
+    }
+  };
+
+  const validateForm = () => {
+    if (!registe_data.name.trim()) {
+      toast.error("name is required");
+      return false;
+    }
+    if (!registe_data.email.trim()) {
+      toast.error("email is required");
+      return false;
+    }
+    if (!registe_data.password.trim()) {
+      toast.error("password is required");
+      return false;
+    }
+
+    return true;
+  };
+
+  const clearForm = () => {
+    formdata({
+      name: "",
+      email: "",
+      password: "",
+    });
   };
 
   return (
@@ -19,20 +64,15 @@ const Register = () => {
           <div className="col-md-4">
             <div className="card p-4 ">
               <form onSubmit={handleSubmit}>
-              <div className="mb-3">
-                  <select id="select1" className="custom-select" multiple>
-                    <option value="1">Imitiaz</option>
-                    <option value="2">Ocean</option>
-                    <option value="3">zomoto</option>
-                    <option value="4">daraz</option>
-                  </select>
-                </div>
                 <div className="mb-3">
                   <input
-                    type="url"
+                    type="text"
                     className="form-control bg-light"
-                    id="company"
-                    placeholder="Company"
+                    id="name"
+                    placeholder="name"
+                    name="name"
+                    onChange={handleChange}
+                    value={registe_data.name}
                   ></input>
                 </div>
                 {/* email */}
@@ -42,6 +82,9 @@ const Register = () => {
                     className="form-control bg-light"
                     id="Email"
                     placeholder="Email"
+                    name="email"
+                    onChange={handleChange}
+                    value={registe_data.email}
                   ></input>
                 </div>
 
@@ -52,10 +95,17 @@ const Register = () => {
                     className="form-control bg-light"
                     id="password"
                     placeholder="Password"
+                    name="password"
+                    onChange={handleChange}
+                    value={registe_data.password}
                   ></input>
                 </div>
+
                 <div className="d-grid gap-2 col-4 mx-auto">
-                  <button className="btn btn-dark rounded-pill ">Submit</button>
+                  <button className="btn btn-dark rounded-pill" type="submit">
+                    Sign Up
+                  </button>
+                  <Link to ='/login'>already Account</Link>
                 </div>
               </form>
             </div>
